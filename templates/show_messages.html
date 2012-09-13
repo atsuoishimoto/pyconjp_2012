@@ -1,0 +1,10 @@
+<!doctype html>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+
+<h1>登録済みメッセージ</h1>
+{% for message in messages %}
+    <div>{{ message }}</div>
+{% endfor %}
+
+<hr/>
+<a href="{{ url_for('message_form') }}">戻る</a>
