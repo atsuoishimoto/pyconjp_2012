@@ -39,11 +39,19 @@ def add_message():
 @app.route('/show')
 def show_messages():
     # テンプレートファイル templates/show_messages.htmlを表示
-    return render_template('show_messages.html',
-                           messages=reversed(session['messages']))
+#    return render_template('show_messages.html',
+#                           messages=reversed(session['messages']))
+    import cProfile
+    localvars = {}
+    cProfile.runctx("""ret = render_template('show_messages.html',
+                           messages=reversed(session['messages']))""",
+                           globals(), localvars, sort='cumulative') 
+
+    return localvars["ret"]
 
 def main():
     app.secret_key = "secret"
+    app.logger.setLevel
     app.run(debug = True)
     
 if __name__ == '__main__':
